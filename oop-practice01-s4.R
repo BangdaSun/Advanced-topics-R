@@ -4,15 +4,15 @@
 
 #   Constructor
 rectangular = setClass(
-	"rectangular", 
-	representation(
-		width = "numeric",
-		length = "numeric"
-    ),
-    prototype = list(
-        width = 0,
-        length = 0
-    )
+  "rectangular", 
+  representation(
+    width = "numeric",
+    length = "numeric"
+  ),
+  prototype = list(
+    width = 0,
+    length = 0
+  )
 )
 
 #   Method: calculate area
@@ -25,11 +25,11 @@ setGeneric(
 )
 
 setMethod(
-    f = "calcArea", 
-    signature = "rectangular",
-    definition = function(object) {
-      return(object@width * object@length)
-    }
+  f = "calcArea", 
+  signature = "rectangular",
+  definition = function(object) {
+    return(object@width * object@length)
+  }
 )
 
 #   Method: is.square
