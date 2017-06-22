@@ -6,7 +6,7 @@
 rectangular = setClass(
 	"rectangular", 
 	representation(
-    	width = "numeric",
+		width = "numeric",
         length = "numeric"
     ),
     prototype = list(
