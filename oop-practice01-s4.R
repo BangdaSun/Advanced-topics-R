@@ -5,7 +5,7 @@
 #   Constructor
 rectangular = setClass(
 	"rectangular", 
-    representation(
+	representation(
     	width = "numeric",
         length = "numeric"
     ),
