@@ -5,3 +5,7 @@ Advanced topics in R, include:
 * functional programming
 * package developing and management
 * performance and optimization
+
+### R Vocabulary
+
+http://adv-r.had.co.nz/Vocabulary.html
