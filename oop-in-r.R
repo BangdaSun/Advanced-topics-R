@@ -43,7 +43,11 @@ unclass(lmout)
 methods(class = "default")
 
 #   for the functions with star, they are nonvisible function, we can use getAnywhere()
+methods(print)
 getAnywhere(print.lm)
+# these functions are not in default namespace, we need use package qualifer :: to access them
+# which means we can call print() on correspond object, R will call UseMethod() on the object  of class
+# but we cannot call print.__() directly
 
 #   Write S3
 #   use attr() and class() to set the attribute of class, then define method
@@ -65,13 +69,13 @@ methods( ,"employee") # check the methods of employee class
 j
 
 #   Inheritance
-#   define a new class hour employee for employee
+#   define a new class hour employee for employee: with extra variable - hrsthismonth
 k = list(name = "Kate", salary = 68000, union = FALSE, hrsthismonth = 2)
 class(k) = c("hrlyemployee", "employee")
 k
-print.employee(k)
+print.employee(k)  # UseMethod() will search method match with "mployee" class in generic print
 
-#   One more example: write a class for upper triangular matrix
+#   One more example: write a class for upper triangular matrix #####################################
 #
 #   1 5 12
 #   0 6 9
@@ -173,21 +177,29 @@ test
 test()
 #   ##################################################################################################
 
+#   examples provided here about writing S3 use this way:
+#   define a list --> set class(lst) equals class name --> names in list would be attributes
+#   --> define some methods based on existed generic function: func.method()
+#   --> or just define functions related to this class
+
+# IN GENERAL, WORKING WITH S3 IS CASUAL
+
 ### S4 class
 #   for safety reasons, S4 class is introduced. e.g., for employee class
 #   three possible errors:
 #     forget to give "union"; misspell "union"; set other classes to be employee by mistake
 #   while S3 will not warn these mistakes.
 
-#   +------------------------+-------------------------+--------------+
-#   + operation              + S3                      + S4           +
-#   + -----------------------+-------------------------+--------------+
-#   + define class           + implicit in constructor + setClass()   +
-#   + create object          + build list, set attr    + new()        +
-#   + refer  attribute       + $                       + @            + 
-#   + implement generic func + define f.classname()    + setMethod()  +
-#   + declare generic        + UseMethod()             + setGeneric() +
-#   +-----------------------------------------------------------------+
+#   +------------------------+------------------------------------+--------------+
+#   + operation              + S3                                 + S4           +
+#   + -----------------------+------------------------------------+--------------+
+#   + define class           + implicit in constructor (function) + setClass()   +
+#   + create object          + build list, set attr               + new()        +
+#   + refer  attribute       + $                                  + @            + 
+#   + implement generic func + define f.classname()               + setMethod()  +
+#   + declare generic        + UseMethod()                        + setGeneric() +
+#   +----------------------------------------------------------------------------+
+#
 
 #   Write S4 class
 #   still use employee example
