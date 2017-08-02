@@ -28,9 +28,11 @@ print(lmout)  # when we print this, print() will revoke print.lm() method
 print         # where we can see it's generic, just revoke methods
 methods(print)      # see methods
 showMethods(print)  # not S4?
-summary.lm
+
+summary.lm    # lm method of generic function: summary
 methods(summary)
 showMethods(summary)
+
 predict.lm
 showMethods(predict)
 
@@ -91,9 +93,9 @@ sum1toi = function(i) return(i*(i + 1) / 2)
 ut = function(inmat) {
   n           = nrow(inmat)
   rtrn        = list()   # start building object
-  class(rtrn) = "ut"
+  class(rtrn) = "ut"     # define class
   
-  rtrn$mat = vector(length = sum1toi(n))
+  rtrn$mat = vector(length = sum1toi(n))   # set attributes
   rtrn$ix  = sum1toi(0:(n-1)) + 1
   
   for (i in 1:n) {
@@ -105,6 +107,7 @@ ut = function(inmat) {
   return(rtrn)
 }
 
+# define methods for "ut" class
 #   uncompress utmat to a full matrix
 expandut = function(utmat) {
   n = length(utmat$ix) # numbers of rows and columns of matrix
@@ -189,7 +192,7 @@ test()
 #   Write S4 class
 #   still use employee example
 setClass("employee",
-         representation(
+         representation(   # use slots in new version
            name   = "character",
            salary = "numeric",
            union  = "logical"
