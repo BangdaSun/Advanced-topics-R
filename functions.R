@@ -82,6 +82,26 @@ sapply(lst, '[', 2)
 arg <- list(1:10, na.rm = TRUE)
 do.call(mean, arg)
 
+#   Default args
+# Since arguments in R are evaluated lazily, the default value can be defined in terms of other arguments like this
+g <- function(a = 1, b = a * 2) {
+  c(a, b)
+}
+g()
+
+# but if that args has no default value, it went get error
+g <- function(a, b = a * 2) {
+  c(a, b)
+}
+g()  # --> ERROR!
+
+# Default arguments can even be defined in terms of variables created within the function. (Hadley thinks it's a bad practice)
+h <- function(a = 1, b = d) {
+  d <- (a + 1) ^ 2
+  c(a, b)
+}
+h()
+
 #   Missing values
 # can use missing(), but... (from hadley)
 # "I usually set the default value to NULL and use is.null() to check if the argument was supplied."
