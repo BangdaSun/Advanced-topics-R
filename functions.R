@@ -14,7 +14,7 @@ environment(f)
 
 # but, primitive functions don't have these three components
 
-### 2.Lexical scoping
+### 2. Lexical scoping
 
 # scoping is the set of rules that govern how R looks up the value of a symbol
 x <- 10
@@ -23,7 +23,7 @@ x
 
 # four basic principles: name masking; functions vs variables; a fresh start; dynamic lookup
 
-#   Name masking: all the way to the global environment
+##  (1) Name masking: all the way to the global environment
 x <- 1
 h <- function() {
   y <- 2
@@ -35,7 +35,7 @@ h <- function() {
 }
 h()  # --> 1, 2, 3
 
-#   Functions vs. variables
+##  (2) Functions vs. variables
 n <- function(x) x / 2
 o <- function() {
   n <- 10
@@ -43,7 +43,7 @@ o <- function() {
 }
 o()  # --> 5
 
-#   A fresh start
+##  (3) A fresh start
 j <- function() {
   if (!exists("a")) {
     a <- 1
@@ -54,7 +54,7 @@ j <- function() {
 }
 j()  # --> 1 every time, function call are independent
 
-#   Dynamic lookup
+##  (4) Dynamic lookup
 
 # use this function to avoid the corecion of variable 
 codetools::findGlobals(o)
@@ -74,7 +74,7 @@ sapply(lst, '[[', 2)
 sapply(lst, '[', 2)
 
 ### 4. Function arguments
-#   Calling functions
+##  (1) Calling functions
 # when calling a function you can specify args by position, by complete name, by partial name
 # args are matched first by exact name, then by prefix matching, and finally by position
 
@@ -82,7 +82,7 @@ sapply(lst, '[', 2)
 arg <- list(1:10, na.rm = TRUE)
 do.call(mean, arg)
 
-#   Default args
+##  (2) Default args
 # Since arguments in R are evaluated lazily, the default value can be defined in terms of other arguments like this
 g <- function(a = 1, b = a * 2) {
   c(a, b)
@@ -102,7 +102,7 @@ h <- function(a = 1, b = d) {
 }
 h()
 
-#   Missing values
+##  (3) Missing values
 # can use missing(), but... (from hadley)
 # "I usually set the default value to NULL and use is.null() to check if the argument was supplied."
 
@@ -121,11 +121,11 @@ f <- function(x) {
 }
 f(stop('This is an error!'))
 
-### 5.Special calls
+### 5. Special calls
 
-#   Infix functions: +/-, %in% ...
+##  (1) Infix functions: +/-, %in% ...
 
-#   Replacement functions
+##  (2) Replacement functions
 # they return the modified object in place, like names(), colnames()
 # they have two arguments: (x, value)
 'second<-' <- function(x, value) {
@@ -143,4 +143,4 @@ second(x) <- 4
 
 # functions can return invisible value with invisible(). use () to display
 
-# On exit
+## On exit
