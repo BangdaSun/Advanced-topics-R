@@ -35,7 +35,7 @@ add(1, 2, 3)
 # int, double, String, bool
 # NumericVector, IntegerVector, CharacterVector, LogicalVector
 
-#   (1) No input - scalar output
+##  (1) No input - scalar output
 # R func:
 one <- function() 1L
 
@@ -46,11 +46,11 @@ cppFunction(
   }'
 )
 
-#   (2) Scalar input - scalar output
+##  (2) Scalar input - scalar output
 
-#   (3) Vector input - scalar output
+##  (3) Vector input - scalar output
 
-#   (4) Vector input - vector output
+##  (4) Vector input - vector output
 # R func
 pdistR <- function(x, ys) {
   sqrt((x - ys) ^ 2)
@@ -68,7 +68,7 @@ cppFunction(
   }'
 )
 
-#   (5) Matrix input - vector output
+##  (5) Matrix input - vector output
 cppFunction(
   'NumericVector rowSumsC(NumericMatrix x) {
      int nrow = x.nrow(), ncol = x.ncol();
@@ -86,7 +86,7 @@ cppFunction(
 )
 
 
-#   Using sourceCpp
+##  (6) Using sourceCpp
 # use separate C++ files
 # start with 
 # 
@@ -101,6 +101,3 @@ cppFunction(
 
 sourceCpp('findMin.cpp')  # min()
 sourceCpp('findMinIdx.cpp')  # which.min()
-
-
-
