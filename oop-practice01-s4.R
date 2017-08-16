@@ -1,8 +1,8 @@
 #
-#   Create a rectangular class (S4)
+# Create a rectangular class (S4)
 #
 
-#   Constructor
+# Constructor
 rectangular = setClass(
   "rectangular", 
   representation(
@@ -15,8 +15,8 @@ rectangular = setClass(
   )
 )
 
-#   Method: calculate area
-#   be aware to set as generic function
+# Method: calculate area
+# be aware to set as generic function
 setGeneric(
   name = "calcArea", 
   def  = function(object) {
@@ -32,7 +32,7 @@ setMethod(
   }
 )
 
-#   Method: is.square
+# Method: is.square
 setGeneric(
   name = 'is.square',
   def  =  function(object) {
@@ -48,14 +48,14 @@ setMethod(
   }
 )
 
-#   Create an object of rectangular
+# Create an object of rectangular
 rect1 = new("rectangular", width = 2, length = 3)
 
-#   Get / set the attribute
+# Get / set the attribute
 slot(rect1, "width")
 slot(rect1, "width") = 5
 
-#   Test
+# Test
 rect1@width
 calcArea(rect1)
 is.square(rect1)
