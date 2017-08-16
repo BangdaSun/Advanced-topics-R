@@ -37,13 +37,13 @@ is.vector(factor(c(0,1)))
 is.atomic(factor(0, 1))
 is.list(factor(0, 1))
 
-#   Atomic vectors
+##  (1) Atomic vectors
 #   four basic types, use (as/is).(integer/double/numeric/logical/character)
 
-#   List - recursive vectors (list can contain list)
+##  (2) List - recursive vectors (list can contain list)
 #   use unlist() -> atomic vector
 
-#   Attributes
+##  (3) Attributes
 #   all objects can have extra attributes to store metadata about the object.
 x <- 1:10
 attributes(x)
@@ -59,12 +59,12 @@ identical(x, y)  # TRUE
 
 # most attributes are lost when modifying, except: (names, dimension, class)
 
-#   Names
+## (4)Names
 x <- c(a = 1, b = 2, c = 3)
 names(x)
 unname(x)
 
-#   Factors
+##  (5) Factors
 #   built on top of integer vectors using attributes: class(factor) and levels
 x <- factor(c('a', 'b', 'a', 'c'))
 attributes(x)
