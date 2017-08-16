@@ -9,7 +9,7 @@
 # install.packages('memoise')
 library(memoise)
 
-#   expriment - define a function makes CPU spend 1 sec
+# expriment - define a function makes CPU spend 1 sec
 fun = memoise(function(x) {Sys.sleep(1); runif(1)})
 system.time(print(fun()))
 system.time(print(fun()))  # much less time
@@ -19,11 +19,11 @@ system.time(print(fun()))
 
 ### 3.2 Rprof() - performance monitoring
 
-#   take one R file to run
+# take one R file to run
 system.time(source('rejection-sampling.R'))
 system.time(source('rejection-sampling.R'))  # runtime almost same, no cache
 
-#   monitoring performance
+# monitoring performance
 file = 'rejection-sampling_rprof.out'
 Rprof(file)                     # start monitoring   
 source('rejection-sampling.R')  # running
