@@ -7,17 +7,17 @@
 #
 
 ### S3 class
-#   Most class in R are S3. It has a list, with a class name attribute and dispatch.
-#   dispatch capability enables the use of generic functions.
-#   S4 class were developed later, meaning that you cannot accidentally access a 
-#   class component that is not already existence
+# Most class in R are S3. It has a list, with a class name attribute and dispatch.
+# dispatch capability enables the use of generic functions.
+# S4 class were developed later, meaning that you cannot accidentally access a 
+# class component that is not already existence
 
-#   S3 generic functions
-#   there are different methods could be revoked for one function for different input,
-#   e.g. print(), summary(), plot()
+# S3 generic functions
+# there are different methods could be revoked for one function for different input,
+# e.g. print(), summary(), plot()
 
-#   example: lm()
-#   where we can create a lm class
+# example: lm()
+# where we can create a lm class
 ?lm()
 x = c(1, 2, 3)
 y = c(1, 3, 8)
@@ -36,28 +36,28 @@ showMethods(summary)
 predict.lm
 showMethods(predict)
 
-#   Remove class, get a list
+# Remove class, get a list
 unclass(lmout)
 
-#   Check all generic functions
+# Check all generic functions
 methods(class = "default")
 
-#   for the functions with star, they are nonvisible function, we can use getAnywhere()
+# for the functions with star, they are nonvisible function, we can use getAnywhere()
 methods(print)
 getAnywhere(print.lm)
 # these functions are not in default namespace, we need use package qualifer :: to access them
 # which means we can call print() on correspond object, R will call UseMethod() on the object  of class
 # but we cannot call print.__() directly
 
-#   Write S3
-#   use attr() and class() to set the attribute of class, then define method
+###  Write S3
+# use attr() and class() to set the attribute of class, then define method
 j = list(name = "Joe", salary = 55000, union = TRUE)
 class(j)
 class(j) = "employee"
 attr(j)    # doesn't work
 attributes(j)
 
-#   then we define print method for employee class
+# then we define print method for employee class
 j
 print.employee = function(wrkr) {
   cat(wrkr$name, "\n")
@@ -68,14 +68,14 @@ print.employee = function(wrkr) {
 methods( ,"employee") # check the methods of employee class
 j
 
-#   Inheritance
-#   define a new class hour employee for employee: with extra variable - hrsthismonth
+### Inheritance
+# define a new class hour employee for employee: with extra variable - hrsthismonth
 k = list(name = "Kate", salary = 68000, union = FALSE, hrsthismonth = 2)
 class(k) = c("hrlyemployee", "employee")
 k
 print.employee(k)  # UseMethod() will search method match with "mployee" class in generic print
 
-#   One more example: write a class for upper triangular matrix #####################################
+# One more example: write a class for upper triangular matrix ==========================================
 #
 #   1 5 12
 #   0 6 9
@@ -86,7 +86,7 @@ print.employee(k)  # UseMethod() will search method match with "mployee" class i
 #   We will also include a component ix in this class, to show where in mat the various
 #   column begins. Here ix = c(1, 2, 4), column 1 start at mat[1], col2 - mat[2], col3 - mat[4]
 
-#   ##################################################################################################
+#   =====================================================================================================
 #   class "ut", compact storage of upper triangular matrices
 
 #   utility function, return 1 + 2 + ... + i
@@ -112,7 +112,7 @@ ut = function(inmat) {
 }
 
 # define methods for "ut" class
-#   uncompress utmat to a full matrix
+# uncompress utmat to a full matrix
 expandut = function(utmat) {
   n = length(utmat$ix) # numbers of rows and columns of matrix
   fullmat = matrix(nrow = n, ncol = n) # initializa with NA
@@ -128,12 +128,12 @@ expandut = function(utmat) {
   return(fullmat)
 }
 
-#   print matrix
+# print matrix
 print.ut = function(utmat) {
   print(expandut(utmat))
 }
 
-#   multiplication
+# multiplication
 "%mut%" = function(utmatLeft, utmatRight) {
   n      = length(utmatLeft$ix)
   utprod = ut(matrix(0, nrow = n, ncol = n))
@@ -163,7 +163,7 @@ print.ut = function(utmat) {
   return(utprod)
 }
 
-#   test
+# test
 test = function() {
   utmatLeft  = ut(rbind(1:2, c(0, 2)))
   utmatRight = ut(rbind(3:2, c(0, 1)))
@@ -175,12 +175,11 @@ test = function() {
 
 test
 test()
-#   ##################################################################################################
-
-#   examples provided here about writing S3 use this way:
-#   define a list --> set class(lst) equals class name --> names in list would be attributes
-#   --> define some methods based on existed generic function: func.method()
-#   --> or just define functions related to this class
+#   =====================================================================================================
+# examples provided here about writing S3 use this way:
+# define a list --> set class(lst) equals class name --> names in list would be attributes
+# --> define some methods based on existed generic function: func.method()
+# --> or just define functions related to this class
 
 # IN GENERAL, WORKING WITH S3 IS CASUAL
 
@@ -201,8 +200,8 @@ test()
 #   +----------------------------------------------------------------------------+
 #
 
-#   Write S4 class
-#   still use employee example
+###  Write S4 class
+# still use employee example
 setClass("employee",
          representation(   # use slots in new version
            name   = "character",
@@ -218,7 +217,7 @@ slot(joe, "salary")
 slot(joe, "salary") = 65000
 slot(joe, "salary") 
 
-#   Generic functions on S4
+##  Generic functions on S4
 show(joe)
 setMethod("show", "employee",
           function(object) {
